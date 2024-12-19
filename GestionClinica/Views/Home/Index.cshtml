@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<body>
+    <div class="container py-5">
+        <!-- Encabezado -->
+        <div class="text-center mb-4">
+            <h1 class="display-4">Sistema de Gestión Clínica</h1>
+            <p class="lead">Selecciona una opción para empezar</p>
+        </div>
+
+        <!-- Cuadrícula de opciones -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Opción: Médicos -->
+            <div class="col">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-person-badge fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">Gestión de Médicos</h5>
+                        <p class="card-text">Administra el registro y los datos de los médicos.</p>
+                        <a href="/Medicos" class="btn btn-primary">Ir a Médicos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opción: Citas -->
+            <div class="col">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-calendar-check fs-1 text-success"></i>
+                        <h5 class="card-title mt-3">Gestión de Citas</h5>
+                        <p class="card-text">Programa y administra las citas médicas.</p>
+                        <a href="/Citas" class="btn btn-success">Ir a Citas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opción: Pacientes -->
+            <div class="col">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-people fs-1 text-danger"></i>
+                        <h5 class="card-title mt-3">Gestión de Pacientes</h5>
+                        <p class="card-text">Administra los datos de los pacientes.</p>
+                        <a href="/Pacientes" class="btn btn-warning">Ir a Pacientes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie de página opcional -->
+        <footer class="text-center mt-5">
+            <p class="text-muted">&copy; 2024 - Sistema de Gestión Clínica</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+
