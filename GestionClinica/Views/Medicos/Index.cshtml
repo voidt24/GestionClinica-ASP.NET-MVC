@@ -1,7 +1,120 @@
 ﻿
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Médicos";
 }
 
-<h1>Medicos</h1>
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">Sección de Médicos</h1>
+        </div>
 
+        <!-- opciones -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <!-- Opción: Especialidad -->
+        <div class="col">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-calendar-check fs-1 text-success"></i>
+                    <h5 class="card-title mt-3">Especialidad Médica</h5>
+                    <p class="card-text">Agrega especialidades para asignar a los médicos.</p>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#EspecialidadModal">Agregar</button>
+
+                </div>
+            </div>
+        </div>
+
+            <!-- Opción: Médicos -->
+            <div class="col">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-person-badge fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">Registro de Médicos</h5>
+                        <p class="card-text">Registra médicos en la base de datos.</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicoModal">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODALS -->
+
+    <!--MODAL ESPEC. -->
+    <div class="modal fade" id="EspecialidadModal" tabindex="-1" aria-labelledby="EspecialidadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles de la especialidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/" method="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Nombre*</span>
+                            <input type="text" class="form-control" placeholder="Ej. Cardiología" aria-label="Nombre de espec." aria-describedby="basic-addon1">
+
+                        </div>
+
+                        <div class="modal-footer">                   
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL MEDICOS -->
+    <div class="modal fade" id="MedicoModal" tabindex="-1" aria-labelledby="MedicoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles del Médico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/" method="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Cédula*</span>
+                            <input type="text" class="form-control" placeholder="Cédula del médico..." aria-label="Cédula" aria-describedby="basic-addon1">
+
+                        </div>
+                       
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Nombre*</span>
+                            <input type="text" class="form-control" placeholder="Nombre del médico..." aria-label="Nombre" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Email*</span>
+                            <input type="email" class="form-control" placeholder="Email del médico..." aria-label="Email" aria-describedby="basic-addon1">
+
+                        </div>
+                       
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupSelect01">Especialidad*</label>
+                       
+                            <select class="form-select" id="inputGroupSelect01">
+                                <option selected>Seleccione la especialidad...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Teléfono</span>
+                            <input type="number" class="form-control" placeholder="Teléfono del médico..." aria-label="Teléfono" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <div class="modal-footer">                   
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
