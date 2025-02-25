@@ -1,9 +1,17 @@
+using DAL.DataAccess;
+using GestionClinica.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSingleton(provider => builder.Configuration.GetConnectionString("SQLConnection"));
+
+builder.Services.AddTransient<MedicoRepository<Medico>>();
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
