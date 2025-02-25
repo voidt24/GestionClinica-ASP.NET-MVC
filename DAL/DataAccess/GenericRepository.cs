@@ -12,7 +12,7 @@ namespace DAL.DataAccess
             _connectionString = connectionString;
            
         }
-        public void Create(T entity)
+        public void Create(string query, T entity)
         {
         }
 
@@ -59,14 +59,14 @@ namespace DAL.DataAccess
         }
 
 
-        public T GetById(int id)
+        public T GetById(string tableName, int id)
         {
             return null;
         }
 
-        public void Update(T entity){ }
+        public void Update(string query,T entity){ }
 
-        public string DeleteById(int id)
+        public string DeleteById(string tableName, int id)
         {
             return "s";
         }

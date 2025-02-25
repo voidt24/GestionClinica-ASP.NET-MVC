@@ -17,6 +17,6 @@ namespace DAL.Interfaces
 
         public void Update(string query, T entity);
 
-        public string DeleteById(string tableName,int id);
+        public string DeleteById(string tableName, int id);
     }
 }

@@ -8,6 +8,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton(provider => builder.Configuration.GetConnectionString("SQLConnection"));
 
 builder.Services.AddTransient<MedicoRepository<Medico>>();
+builder.Services.AddTransient<MedicoRepository<Especialidad>>();
+//builder.Services.AddTransient<PacienteRepository<Paciente>>();
+//builder.Services.AddTransient<CitaRepository<Cita>>();
 
 var app = builder.Build();
 
