@@ -6,7 +6,7 @@ namespace GestionClinica.Models
     {
 
         [Key]
-        public int Id { get; set; }
+        public int Id_Especialidad { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio")]
         public string Nombre { get; set; }

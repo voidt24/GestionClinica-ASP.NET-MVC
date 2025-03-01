@@ -5,14 +5,14 @@ namespace GestionClinica.Models
     public class Paciente
     {
         [Key]
-        public int Id {get; set;}
+        public int Id_Paciente { get; set; }
 
         [Required(ErrorMessage = "La cedula es obligatoria")]
-        public int Cedula { get; set; }
-        
+        public int CedulaPaciente { get; set; }
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
         public string Nombre { get; set; }
-       
+
         [Required(ErrorMessage = "El email es obligatorio")]
         public string Email { get; set; }
         public string? Telefono { get; set; }
