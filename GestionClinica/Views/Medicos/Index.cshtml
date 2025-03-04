@@ -1,15 +1,14 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Médicos";
+    @model IEnumerable<GestionClinica.Models.Especialidad>
 }
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Sección de Médicos</h1>
+    </div>
 
-    <div class="container py-5">
-        <div class="text-center mb-4">
-            <h1 class="display-4">Sección de Médicos</h1>
-        </div>
-
-        <!-- opciones -->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- opciones -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
 
         <!-- Opción: Especialidad -->
         <div class="col">
@@ -24,97 +23,129 @@
             </div>
         </div>
 
-            <!-- Opción: Médicos -->
-            <div class="col">
-                <div class="card text-center h-100 shadow-sm">
-                    <div class="card-body">
-                        <i class="bi bi-person-badge fs-1 text-primary"></i>
-                        <h5 class="card-title mt-3">Registro de Médicos</h5>
-                        <p class="card-text">Registra médicos en la base de datos.</p>
+        <!-- Opción:Agregar Médicos -->
+        <div class="col">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-person-badge fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Registro de Médicos</h5>
+                    <p class="card-text">Registra médicos en la base de datos.</p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MedicoModal">Agregar</button>
+                </div>
+            </div>
+        </div> <!-- Opción: Ver Médicos -->
+        <div class="col">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-person-badge fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Médicos Registrados</h5>
+                    <p class="card-text">Visualiza la lista de médicos registrados.</p>
+                    <button type="button" class="btn btn-success text-white" >
+                        <a href="Medicos/Listado" class="text-white text-decoration-none">Ver lista</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODALS -->
+<!--MODAL ESPEC. -->
+<div class="modal fade" id="EspecialidadModal" tabindex="-1" aria-labelledby="EspecialidadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles de la especialidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/Medicos/AgregarEspecialidadMedico" method="POST">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nombre*</span>
+                        <input type="text" name="Nombre" class="form-control" placeholder="Ej. Cardiología" aria-label="Nombre de espec." aria-describedby="basic-addon1">
+
                     </div>
-                </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <!--MODALS -->
+<h1>@TempData["Message"]</h1>
 
-    <!--MODAL ESPEC. -->
-    <div class="modal fade" id="EspecialidadModal" tabindex="-1" aria-labelledby="EspecialidadModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detalles de la especialidad</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/" method="">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Nombre*</span>
-                            <input type="text" class="form-control" placeholder="Ej. Cardiología" aria-label="Nombre de espec." aria-describedby="basic-addon1">
 
-                        </div>
+<!--MODAL MEDICOS -->
+<div class="modal fade" id="MedicoModal" tabindex="-1" aria-labelledby="MedicoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-                        <div class="modal-footer">                   
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--MODAL MEDICOS -->
-    <div class="modal fade" id="MedicoModal" tabindex="-1" aria-labelledby="MedicoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            @if (Model.Any())
+            {
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Detalles del Médico</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/" method="">
+                    <form action="/Medicos/AgregarMedico" method="POST">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Cédula*</span>
-                            <input type="text" class="form-control" placeholder="Cédula del médico..." aria-label="Cédula" aria-describedby="basic-addon1">
+                            <input name="CedulaMedico" type="text" class="form-control" placeholder="Cédula del médico..." aria-label="Cédula" aria-describedby="basic-addon1">
 
                         </div>
-                       
+
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Nombre*</span>
-                            <input type="text" class="form-control" placeholder="Nombre del médico..." aria-label="Nombre" aria-describedby="basic-addon1">
+                            <input name="Nombre" type="text" class="form-control" placeholder="Nombre del médico..." aria-label="Nombre" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Email*</span>
-                            <input type="email" class="form-control" placeholder="Email del médico..." aria-label="Email" aria-describedby="basic-addon1">
+                            <input name="Email" type="email" class="form-control" placeholder="Email del médico..." aria-label="Email" aria-describedby="basic-addon1">
 
                         </div>
-                       
+
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">Especialidad*</label>
-                       
-                            <select class="form-select" id="inputGroupSelect01">
-                                <option selected>Seleccione la especialidad...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+
+                            <select class="form-select" id="inputGroupSelect01" name="Id_Especialidad">
+                                <option selected disabled>Seleccione la especialidad...</option>
+                                @foreach (var especialidad in Model)
+                                {
+                                    <option value="@especialidad.Id_Especialidad" name="@especialidad.Id_Especialidad">@especialidad.Nombre</option>
+
+                                }
                             </select>
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Teléfono</span>
-                            <input type="number" class="form-control" placeholder="Teléfono del médico..." aria-label="Teléfono" aria-describedby="basic-addon1">
+                            <input name="Tel" type="number" class="form-control" placeholder="Teléfono del médico..." aria-label="Teléfono" aria-describedby="basic-addon1">
                         </div>
-                        
-                        <div class="modal-footer">                   
+
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
-            </div>
+            }else{
+                <div class="modal-header">
+                    <h5 class="modal-title">Atención!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+                <div class="modal-body">
+                    <p>Debe agregar una especialidad antes de registrar un médico.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            }
         </div>
     </div>
+</div>

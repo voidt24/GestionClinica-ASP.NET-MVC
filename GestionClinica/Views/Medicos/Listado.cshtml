@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Lista de medicos";
+    @model IEnumerable<GestionClinica.Models.Medico>
+
+}
+
+<h1>Lista de medicos</h1>
+
+
+<div class="d-flex flex-column">    
+    @if (Model.Any())
+    {
+        <div class=" table-container">
+            <table class="table table-hover">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>@Html.DisplayNameFor(medico => medico.Id_Medico)</th>
+                        <th>@Html.DisplayNameFor(medico => medico.CedulaMedico)</th>
+                        <th>@Html.DisplayNameFor(medico => medico.Nombre)</th>
+                        <th>@Html.DisplayNameFor(medico => medico.Email)</th>
+                        <th>@Html.DisplayNameFor(medico => medico.Id_Especialidad)</th>
+                        <th>@Html.DisplayNameFor(medico => medico.Tel)</th>
+                        <th>opciones</th>
+                    </tr>
+
+
+                </thead>
+                <tbody class="bg-light">
+
+                    @foreach (var medico in Model)
+                    {
+                        <tr>
+                            <th>@medico.Id_Medico</th>
+                            <th>@medico.CedulaMedico</th>
+                            <th>@medico.Nombre</th>
+                            <th>@medico.Email</th>
+                            <th>@medico.Id_Especialidad</th>
+                            <th>@medico.Tel</th>
+                            <td class ="text-decoration-none text-dark flex-row justify-content-center align-content-center">
+                                <a class="d-inline-block" asp-action="Edit" asp-route-id="@medico.Id_Medico" asp-controller="Home">
+                                    <p>Editar</p>
+                                </a>
+                                <p class="d-inline-block"> / </p>
+                                <a class="d-inline-block" asp-action="Delete" asp-route-id="@medico.Id_Medico" asp-controller="Home">
+                                    <p>Borrar</p>
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="p-4 text-center">Agrega medicos para ver el listado!</p>
+    }
+</div>

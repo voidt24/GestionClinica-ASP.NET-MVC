@@ -1,4 +1,6 @@
-﻿using DAL.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
+using DAL.Interfaces;
 using Microsoft.Data.SqlClient;
 namespace DAL.DataAccess
 {
@@ -10,22 +12,69 @@ namespace DAL.DataAccess
         {
 
             _connectionString = connectionString;
-           
-        }
-        public void Create(string query, T entity)
-        {
+
         }
 
-        public List<T> GetAll(string query)
+        internal SqlParameter[] GetSqlParametersFromEntity(T entity)
+        {
+            var properties = typeof(T).GetProperties();
+            var parameters = new List<SqlParameter>();
+
+            foreach (var property in properties)
+            {
+                // Ignorar propiedades que no tienen el atributo Key
+                if (property.GetCustomAttributes(typeof(KeyAttribute), false).Any())
+                {
+                    continue;
+                }
+
+                // Obtener el nombre de la propiedad y su valor
+                var value = property.GetValue(entity);
+                if (value == null)
+                {
+                    value = DBNull.Value; // Asegúrate de usar DBNull.Value si es null
+                }
+
+                var paramName = $"@{property.Name}"; // Nombre del parámetro
+
+                // Verificar si el parámetro ya está configurado correctamente
+                var parameter = new SqlParameter(paramName, value);
+                parameters.Add(parameter);
+            }
+
+            return parameters.ToArray();
+        }
+
+        public async Task Create(string query, SqlParameter[] parameters)
+        {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddRange(parameters);
+
+
+                    await connection.OpenAsync();
+                    await command.ExecuteNonQueryAsync();
+                }
+
+            }
+        }
+
+
+        public async Task<List<T>> GetAll(string query)
         {
             List<T> list = new List<T>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                using (var command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     connection.Open();
-                    using (var reader = command.ExecuteReader())
+                    using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (reader.Read())
                         {
@@ -59,16 +108,16 @@ namespace DAL.DataAccess
         }
 
 
-        public T GetById(string tableName, int id)
+        public async Task<T> GetById(string tableName, int id)
         {
             return null;
         }
 
-        public void Update(string query,T entity){ }
+        public async Task Update(string query, T entity) { }
 
-        public string DeleteById(string tableName, int id)
+        public async Task DeleteById(string tableName, int id)
         {
-            return "s";
+
         }
 
     }
